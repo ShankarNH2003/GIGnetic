@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GIGnetic – Smart Tech Solutions</title>
+    <meta
+      name="description"
+      content="GIGnetic: Future-ready software development, consultancy, and digital services."
+    />
+    <meta
+      name="keywords"
+      content="software, web development, AI, portfolio, tech stack, startup"
+    />
+    <meta name="author" content="GIGnetic" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet"/>
+      <style>
+        :root {
+          --nav-bg: #0d0f1a;
+          --nav-link: #e0e0ff;
+          --nav-link-hover: #7f53ac;
+          --primary: #6a11cb;
+          --primary-light: #2575fc;
+          --accent: #ff6fd8;
+          --bg-light: #f0f4ff;
+          --text-dark: #1a1a2e;
+          --heading-font: "Montserrat", sans-serif;
+          --body-font: "Inter", sans-serif;
+        }
+        header {
+          position: sticky;
+          top: 0;
+          width: 100%;
+          background: var(--nav-bg);
+          color: var(--nav-link);
+          z-index: 1000;
+          box-shadow: 0 2px 18px rgba(106, 17, 203, 0.6);
+          padding: 15px 30px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .logo img {
+          height: 50px; /* Adjust size as needed */
+          width: auto; /* Keeps the aspect ratio */
+          vertical-align: middle;
+          display: block;
+        }
+        .logo {
+          display: flex;
+          align-items: center;
+        }
+
+        nav {
+          display: flex;
+          gap: 26px;
+          transition: transform 0.3s ease;
+        }
+        nav a {
+          text-decoration: none;
+          font-family: var(--heading-font);
+          font-weight: 600;
+          color: var(--nav-link);
+          padding: 9px 18px;
+          border-radius: 22px;
+          transition: background 0.3s, color 0.3s;
+        }
+        nav a:hover,
+        nav a.active {
+          background: linear-gradient(
+            90deg,
+            var(--primary-light),
+            var(--primary)
+          );
+          color: white;
+          box-shadow: 0 0 10px var(--primary);
+        }
+        .cta-header {
+          background: linear-gradient(
+            90deg,
+            var(--accent-green),
+            var(--dark-purple)
+          );
+          color: white;
+          padding: 9px 33px;
+          border-radius: 32px;
+          font-family: var(--heading-font);
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: 0 0 24px var(--accent);
+          animation: pulse 1.6s infinite;
+          border: none;
+          margin-left: 30px;
+          user-select: none;
+          transition: box-shadow 0.4s ease;
+          z-index: 1101;
+        }
+        .cta-header:hover,
+        .cta-header:focus {
+          box-shadow: 0 0 36px var(--primary-light);
+          outline: none;
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            box-shadow: 0 0 0 0 var(--primary-light);
+          }
+          50% {
+            box-shadow: 0 0 16px 12px rgba(255, 111, 216, 0.5);
+          }
+        }
+        #menu-toggle {
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          width: 38px;
+          height: 38px;
+          cursor: pointer;
+          z-index: 1201;
+          background: none;
+          border: none;
+          padding: 0;
+        }
+        #menu-toggle span,
+        #menu-toggle span::before,
+        #menu-toggle span::after {
+          display: block;
+          width: 100%;
+          height: 4px;
+          background-color: var(--primary-light);
+          border-radius: 3px;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        #menu-toggle span::before,
+        #menu-toggle span::after {
+          content: "";
+          position: absolute;
+        }
+        #menu-toggle span::before {
+          top: -10px;
+          left: 0;
+        }
+        #menu-toggle span::after {
+          top: 10px;
+          left: 0;
+        }
+        #menu-toggle.open span {
+          background-color: transparent;
+        }
+        #menu-toggle.open span::before {
+          transform: rotate(45deg);
+          top: 0;
+        }
+        #menu-toggle.open span::after {
+          transform: rotate(-45deg);
+          top: 0;
+        } /* Responsive behavior */
+        @media (max-width: 900px) {
+          nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            background: var(--nav-bg);
+            flex-direction: column;
+            width: 260px;
+            border-radius: 0 0 0 24px;
+            box-shadow: -4px 6px 32px rgba(106, 17, 203, 0.7);
+            padding: 90px 30px 30px 30px;
+            gap: 30px;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1200;
+            overflow-y: auto;
+          }
+          nav.open {
+            transform: translateX(0);
+          }
+          nav a {
+            font-size: 1.3rem;
+            padding: 18px 14px;
+            font-weight: 700;
+            color: var(--nav-link);
+            text-shadow: 0 0 5px var(--primary-light);
+            border-radius: 14px;
+            box-shadow: 0 0 10px var(--primary-light);
+            transition: background 0.3s, color 0.3s;
+          }
+          nav a:hover,
+          nav a.active {
+            background: linear-gradient(
+              90deg,
+              var(--primary-light),
+              var(--accent-green)
+            );
+            color: white;
+            text-shadow: 0 0 15px white;
+            box-shadow: 0 0 20px white;
+          }
+          #menu-toggle {
+            display: flex;
+          }
+          .cta-header {
+            display: none;
+            margin-left: 0;
+          }
+        }
+      </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo" tabindex="0">
+        <img src="images/logo.png" alt="GIGnetic Logo" />
+      </div>
+
+      <button
+        id="menu-toggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span></span>
+      </button>
+      <nav id="nav-menu" aria-label="Primary Navigation">
+        <a href="#home" class="active" tabindex="0">Home</a>
+        <a href="#about" tabindex="0">About</a>
+        <a href="#services" tabindex="0">Services</a>
+        <a href="#portfolio" tabindex="0">Portfolio</a>
+        <a href="#contact" tabindex="0">Contact</a>
+      </nav>
+      <button
+        class="cta-header"
+        tabindex="0"
+        onclick="alert('Get in touch with us!')"
+      >
+        Get in Touch
+      </button>
+
+      <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const navMenu = document.getElementById("nav-menu");
+        menuToggle.addEventListener("click", () => {
+          navMenu.classList.toggle("open");
+          menuToggle.classList.toggle("open");
+          const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", (!expanded).toString());
+        });
+        navMenu.querySelectorAll("a").forEach((link) =>
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("open");
+            menuToggle.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          })
+        );
+      </script>
+    </header>
+    <section class="hero" id="home" aria-label="Hero Section">
+      <div class="hero-slider" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80"
+          alt=""
+          class="hero-slide active"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80"
+          alt=""
+          class="hero-slide"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80"
+          alt=""
+          class="hero-slide"
+        />
+      </div>
+      <div class="hero-content">
+        <h1 data-aos="fade-up">
+          Innovating the Future with Smart Tech Solutions
+        </h1>
+        <p data-aos="fade-up">
+          From code to consultancy — we deliver results that matter.
+        </p>
+        <div class="hero-buttons">
+          <button class="hero-cta-btn" onclick="location.href='#services'">
+            Explore Services
+          </button>
+          <button class="hero-cta-btn" onclick="location.href='#contact'">
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="why-section" id="about" aria-labelledby="whychoose-title">
+      <h2
+        id="whychoose-title"
+        style="font-family: var(--heading-font); color: var(--dark-blue)"
+      >
+        Why Choose GIGnetic?
+      </h2>
+      <div class="why-cards">
+        <article
+          class="why-card"
+          data-aos="zoom-in"
+          tabindex="0"
+          role="region"
+          aria-label="Expert Programming"
+        >
+          <span class="why-icon" aria-hidden="true">🛠️</span>
+          <h3>Expert Programming</h3>
+          <p>Custom software tailored to your needs</p>
+        </article>
+        <article
+          class="why-card"
+          data-aos="zoom-in"
+          data-aos-delay="140"
+          tabindex="0"
+          role="region"
+          aria-label="Consultancy Excellence"
+        >
+          <span class="why-icon" aria-hidden="true">📝</span>
+          <h3>Consultancy Excellence</h3>
+          <p>Strategic guidance for tech success</p>
+        </article>
+        <article
+          class="why-card"
+          data-aos="zoom-in"
+          data-aos-delay="240"
+          tabindex="0"
+          role="region"
+          aria-label="Agile Delivery"
+        >
+          <span class="why-icon" aria-hidden="true">⚡</span>
+          <h3>Agile Delivery</h3>
+          <p>Faster time-to-market, no compromise on quality</p>
+        </article>
+      </div>
+    </section>
+    <section
+      class="services-section"
+      id="services"
+      aria-labelledby="services-title"
+    >
+      <h2
+        id="services-title"
+        style="
+          font-family: var(--heading-font);
+          color: var(--dark-purple);
+          text-align: center;
+        "
+      >
+        Our Services
+      </h2>
+      <div class="services-grid">
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="Web Development"
+        >
+          <span class="service-icon" aria-hidden="true">🌐</span>
+          <h4>Web Development</h4>
+          <p>Fast, scalable, engaging web experiences.</p>
+        </article>
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="Mobile App Development"
+        >
+          <span class="service-icon" aria-hidden="true">📱</span>
+          <h4>Mobile App Development</h4>
+          <p>Native and cross-platform mobile apps for all industries.</p>
+        </article>
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="Software Consultancy"
+        >
+          <span class="service-icon" aria-hidden="true">💼</span>
+          <h4>Software Consultancy</h4>
+          <p>Best strategy & architecture for tech-driven growth.</p>
+        </article>
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="Cloud & DevOps"
+        >
+          <span class="service-icon" aria-hidden="true">☁️</span>
+          <h4>Cloud & DevOps</h4>
+          <p>Efficient infrastructure and automation for success.</p>
+        </article>
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="Data Analytics & AI"
+        >
+          <span class="service-icon" aria-hidden="true">📊</span>
+          <h4>Data Analytics & AI</h4>
+          <p>Extract insights & build next-gen solutions.</p>
+        </article>
+        <article
+          class="service-card"
+          data-aos="flip-left"
+          tabindex="0"
+          role="region"
+          aria-label="IT Support & Maintenance"
+        >
+          <span class="service-icon" aria-hidden="true">🔧</span>
+          <h4>IT Support & Maintenance</h4>
+          <p>Keep your business running 24/7, reliably.</p>
+        </article>
+        
+      </div>
+    </section>
+    <section
+      class="portfolio-section"
+      id="portfolio"
+      aria-labelledby="portfolio-title"
+    >
+      <h2
+        id="portfolio-title"
+        style="font-family: var(--heading-font); color: var(--accent-green)"
+      >
+        Portfolio Preview
+      </h2>
+      <div
+        class="portfolio-filters"
+        role="list"
+        aria-label="Portfolio categories"
+      >
+        <button
+          class="port-filter-btn active"
+          data-category="all"
+          role="listitem"
+          onclick="filterPortfolio('all', this)"
+        >
+          All
+        </button>
+        <button
+          class="port-filter-btn"
+          data-category="web"
+          role="listitem"
+          onclick="filterPortfolio('web', this)"
+        >
+          Web
+        </button>
+        <button
+          class="port-filter-btn"
+          data-category="mobile"
+          role="listitem"
+          onclick="filterPortfolio('mobile', this)"
+        >
+          Mobile
+        </button>
+        <button
+          class="port-filter-btn"
+          data-category="ai"
+          role="listitem"
+          onclick="filterPortfolio('ai', this)"
+        >
+          AI
+        </button>
+        <button
+          class="port-filter-btn"
+          data-category="consulting"
+          role="listitem"
+          onclick="filterPortfolio('consulting', this)"
+        >
+          Consulting
+        </button>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <article
+          class="portfolio-card"
+          data-category="web"
+          data-aos="fade-up"
+          tabindex="0"
+          aria-label="Web App - E-commerce project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="Web E-commerce project screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            Web App — E-commerce <button class="port-btn">View Project</button>
+          </div>
+        </article>
+        <article
+          class="portfolio-card"
+          data-category="mobile"
+          data-aos="fade-up"
+          data-aos-delay="120"
+          tabindex="0"
+          aria-label="Mobile Health Tracker project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="Mobile health app screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            Mobile — Health Tracker
+            <button class="port-btn">View Project</button>
+          </div>
+        </article>
+        <article
+          class="portfolio-card"
+          data-category="ai"
+          data-aos="fade-up"
+          data-aos-delay="240"
+          tabindex="0"
+          aria-label="AI Predictive Analytics project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="AI analytics visual screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            AI — Predictive Analytics
+            <button class="port-btn">View Project</button>
+          </div>
+        </article>
+        <article
+          class="portfolio-card"
+          data-category="web"
+          data-aos="fade-up"
+          tabindex="0"
+          aria-label="Web App - E-commerce project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="Web E-commerce project screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            Web App — E-commerce <button class="port-btn">View Project</button>
+          </div>
+        </article>
+        <article
+          class="portfolio-card"
+          data-category="mobile"
+          data-aos="fade-up"
+          data-aos-delay="120"
+          tabindex="0"
+          aria-label="Mobile Health Tracker project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="Mobile health app screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            Mobile — Health Tracker
+            <button class="port-btn">View Project</button>
+          </div>
+        </article>
+        <article
+          class="portfolio-card"
+          data-category="ai"
+          data-aos="fade-up"
+          data-aos-delay="240"
+          tabindex="0"
+          aria-label="AI Predictive Analytics project"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1508766206392-8bd5cf550d1b?auto=format&fit=crop&w=500&q=80"
+            class="port-img"
+            alt="AI analytics visual screenshot"
+            loading="lazy"
+          />
+          <div class="port-overlay">
+            AI — Predictive Analytics
+            <button class="port-btn">View Project</button>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="carousel-section" aria-label="Tech Stack and Tools">
+      <h2
+        style="
+          font-family: var(--heading-font);
+          color: var(--dark-blue);
+          text-align: center;
+        "
+      >
+        Tech Stack & Tools
+      </h2>
+      <div
+        class="carousel-track"
+        id="carouselTrack"
+        tabindex="0"
+        aria-live="polite"
+        aria-atomic="true"
+        aria-relevant="additions"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+          alt="ReactJS Logo"
+          class="tech-logo"
+        />
+        <img
+          src="https://nodejs.org/static/images/logo.svg"
+          alt="Node.js Logo"
+          class="tech-logo"
+        />
+        <img
+          src="https://cdn.worldvectorlogo.com/logos/aws-2.svg"
+          alt="AWS Logo"
+          class="tech-logo"
+        />
+        <img
+          src="https://cdn.worldvectorlogo.com/logos/python-5.svg"
+          alt="Python Logo"
+          class="tech-logo"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png"
+          alt="Flutter Logo"
+          class="tech-logo"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png"
+          alt="SQL Database Logo"
+          class="tech-logo"
+        />
+      </div>
+    </section>
+    <div class="cta-banner" role="region" aria-label="Call to Action Banner">
+      Let’s Build Something Amazing Together! <br />
+      <button class="cta-btn" onclick="location.href='#contact'">
+        Get Started
+      </button>
+    </div>
+    <footer role="contentinfo">
+      <div class="footer-col">
+        <strong>GIGnetic</strong><br />
+        <span>Building the future of tech.</span><br />
+        <span>info@gignetic.com</span><br />
+        <span>+91-98765-43210</span>
+      </div>
+      <div class="footer-col footer-links" aria-label="Footer Quick Links">
+        <strong>Quick Links</strong><br />
+        <a href="#home">Home</a><br />
+        <a href="#about">About</a><br />
+        <a href="#services">Services</a><br />
+        <a href="#portfolio">Portfolio</a>
+      </div>
+      <div class="footer-col" aria-label="Social Media Links">
+        <strong>Follow Us</strong>
+        <div class="footer-social">
+          <a
+            href="#"
+            class="footer-social-icon"
+            title="Instagram"
+            aria-label="Instagram"
+            >📷</a
+          >
+          <a
+            href="#"
+            class="footer-social-icon"
+            title="LinkedIn"
+            aria-label="LinkedIn"
+            >💼</a
+          >
+          <a
+            href="#"
+            class="footer-social-icon"
+            title="Twitter"
+            aria-label="Twitter"
+            >🐦</a
+          >
+        </div>
+      </div>
+      <div class="footer-col">
+        <strong>Services</strong><br />
+        Web Development<br />
+        Mobile Apps<br />
+        Consultancy<br />
+        Cloud/DevOps<br />
+        Data Analytics<br />
+        AI Solutions
+      </div>
+      <div class="footer-legal">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms & Conditions</a>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 900, once: true });
+      function filterPortfolio(category, button) {
+        document
+          .querySelectorAll(".port-filter-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        if (button) button.classList.add("active");
+        document.querySelectorAll(".portfolio-card").forEach((card) => {
+          card.style.display =
+            category === "all" || card.dataset.category === category
+              ? "inline-block"
+              : "none";
+        });
+      }
+      const carouselTrack = document.getElementById("carouselTrack");
+      setInterval(() => {
+        if (carouselTrack) {
+          const first = carouselTrack.firstElementChild;
+          carouselTrack.appendChild(first);
+        }
+      }, 2000);
+      document.querySelectorAll(".why-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const rotateX = -10 + (y / rect.height) * 20;
+          const rotateY = -10 + (x / rect.width) * 20;
+          card.style.transform = `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "scale(1)";
+        });
+      });
+      const slides = document.querySelectorAll(".hero-slide");
+      let currentSlide = 0;
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+      }
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 5000); // Mobile nav toggle and close button transform const menuToggle = document.getElementById('menu-toggle'); const navMenu = document.getElementById('nav-menu'); menuToggle.addEventListener('click', () => { navMenu.classList.toggle('open'); menuToggle.classList.toggle('open'); const expanded = menuToggle.getAttribute('aria-expanded') === 'true'; menuToggle.setAttribute('aria-expanded', (!expanded).toString()); }); navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('open'); menuToggle.classList.remove('open'); menuToggle.setAttribute('aria-expanded', 'false'); }) );
+    </script>
+  </body>
+</html>
